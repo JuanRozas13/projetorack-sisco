@@ -13,7 +13,7 @@ enable
       !Habilitando senha do tipo Password Tipo-7
       !OBSERVAÇÃO IMPORTANTE: veja o arquivo 00-DocumentacaoDaRede.txt a partir da linha: 90 
       !(#02_ Usuário e Senha padrão dos Switches e Routers Cisco de cada Grupo:)
-      password ????
+      password 123@Tatuape
 
       !Forçando fazer login com usuário e senha local
       login local 
@@ -50,7 +50,7 @@ enable
       !Habilitando senha do tipo Password Tipo-7
       !OBSERVAÇÃO IMPORTANTE: veja o arquivo 00-DocumentacaoDaRede.txt a partir da linha: 90 
       !(#02_ Usuário e Senha padrão dos Switches e Routers Cisco de cada Grupo:)
-      password ????
+      password 123@Tatuape
 
       !Forçando fazer login com usuário e senha local
       login local 

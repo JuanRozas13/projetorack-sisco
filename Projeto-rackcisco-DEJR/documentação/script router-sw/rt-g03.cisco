@@ -1,77 +1,53 @@
-!Entrar no modo Eexc Privilegiado
+!Acessando o modo Exec Privilegiado
 enable
-    clock set 20:20:00 24 october 2025
+
+    !Configuração de data/hora em inglês, abreviado ou completo
+    !Exemplo: October ou Oct
+    !Primeiro Hora no formato: 00:00:00 (hora:minutos:segundos) depois Data no formato: Dia Mês (Completo ou Abreviado) Ano Completo
+    clock set 20:35:00 25 october 2025
+
     configure terminal
-        hostname rt-g03
+        hostname rt-g3
         service password-encryption
-        login block-for 120 attempts 2 within 60
-        security password min-length 8
         service timestamps log datetime msec
         service timestamps debug datetime msec
-        logging buffered 4096 
+        security passwords min-length 8
+        login block-for 120 attempts 4 within 60
         no ip domain-lookup
-        banner motd #Juan Rozas LGPD#
+        
+        !Configuração do Banner da mensagem do dia
+        banner motd !                                                                                                                  
+        _____    _____      ______  _____  _______  _____    _____  _______   _____   _____   _______  _____    _____  
+        (_____)  (_____)    (______)(_____)(__ _ __)(_____)  (_____)(_______) (_____) (_____) (_______)(_____)  (_____)
+        (_)   (_)(_)___      (_)__  (_)___     (_)  (_)___(_)(_)  ___   (_)   (_)___(_)(_)__(_)   (_)  (_)   (_)(_)___  
+        (_)   (_)  (___)_    (____)   (___)_   (_)  (_______)(_) (___)  (_)   (_______)(_____)    (_)  (_)   (_)  (___)_
+        (_)___(_)  ____(_)   (_)____  ____(_)  (_)  (_)   (_)(_)___(_)__(_)__ (_)   (_)( ) ( )  __(_)__(_)___(_)  ____(_)
+        (_____)  (_____)    (______)(_____)   (_)  (_)   (_) (_____)(_______)(_)   (_)(_)  (_)(_______)(_____)  (_____)!
+                                                                                                                        
+                                                                                                                        
+        
+        !Criação dos usuários, senhas do Tipo-5 e privilégios diferenciados
         enable secret 123@Tatuape
-        !criando usuarios
-        username senac secret 123@Tatuape 
-        username tatuape password 123@Tatuape
-        username admin privilege 15 secret 123@Tatuape
+        username ERIVELTON privilege 15 secret 123@Tatuape
+        username DIEGO privilege 15 secret 123@Tatuape
+        username JUAN privilege 15 secret 123@Tatuape
+        username RAPHAEL privilege 15 secret 123@Tatuape
+        username VAAMONDE privilege 15 secret 123@Tatuape
         no cdp run
-        no lldp run 
+        no lldp run
+
         !configurando a line console 0
         line console 0
+            password 123@Tatuape
             login local
-            password 123@Tatuape
-            logging synchronous 
-            exec-timeout 5 30
-            exit
-        !configurando a line vty
-        line vty 0 4
-            login local 
-            password 123@Tatuape
-            exec-timeout 5 30
-            transport input ssh
             logging synchronous
-            exit
-        !configuração do ssh
-        ip domain-name senac.br 
-        crypto key generate rsa general-keys modulus 1024
-        ip ssh version 2
-        ip ssh time-out 60
-        ip ssh authentication-retries 2
-        !Configuração Interface LAN
-        interface gigabitEthernet0/0
-            description Interface de Gateway da LAN
-            ip address 192.168.1.254 255.255.255.0
-            no shutdown
+            exec-timeout 5 30
             end
     copy running-config startup-config
-
-!nslookup nome-dispositivo
-
-
-!show ip interface brief
-
-!rede0.0.0.0 mask0.0.0.0 200.200.200.2
-
-!comando no terminal
-!windows: route print
-!linux: route -n
-!tracert
-!wireshark
-
-
-
-! confi s0/1/0
-! conf t
-!     int s0/1/0
-!         ip address 10.0.0.1 255.0.0.0
-!         description porta wan que liga topologia01/topologia02
-!         no shutdown
-!         clock rate 128000
-!         bandwidth 128
-!         end
-!     route rip
-!         network 10.0.0.0
-!         network 192.168.1.0
-        
+    show clock
+    show running-config
+    show running-config | section include con 0
+    show users
+    show logging
+    disable
+    exit

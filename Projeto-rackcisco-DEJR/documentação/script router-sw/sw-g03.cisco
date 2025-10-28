@@ -4,80 +4,50 @@ enable
   !Configuração de data/hora em inglês, abreviado ou completo
   !Exemplo: October ou Oct
   !Primeiro Hora no formato: 00:00:00 (hora:minutos:segundos) depois Data no formato: Dia Mês (Completo ou Abreviado) Ano Completo
-  clock set 19:44:00 27 outubro 2025
+  clock set 20:30:00 25 october 2025
 
-  !Acessar modo de Configuração Global
+
   configure terminal
-
-    !Configuração do nome do Switch 3560
-    !Obrigatório para a configuração do SSH e demais serviços de redes
-    !Mudar o nome do Switch 3560 para cada equipamento do seu grupo
-    !OBSERVAÇÃO IMPORTANTE: veja o arquivo 00-DocumentacaoDaRede.txt a partir da linha: 68 
-    !(#03_ Nome dos Switches, Routers e Access Point de Cada Grupo:)
-    hostname sw-g03
-
-    !Habilitar o serviço de Criptografia de Senhas do Tipo-7 Password 
+    hostname sw-g3
     service password-encryption
-
-    !Habilitar o serviço de marcação de Data/Hora detalhado nos Logs
     service timestamps log datetime msec
-
-    !Habilitando o serviço de marcação de Data/Hora detalhado nos Logs do Debug
     service timestamps debug datetime msec
-
-    !Verificar tentativas de conexão simultâneas, fazer o bloqueio de um
-    !período determinado de tempo, proteção contra Brute Force
     login block-for 120 attempts 4 within 60
+    no ip domain-lookup 
 
-    !Desativar a resolução de nomes de domínio
-    no ip domain-lookup
+    !Configuração do Banner da mensagem do dia    
+    banner motd !                                                                                                                  
+    _____    _____      ______  _____  _______  _____    _____  _______   _____   _______  _____    _____    _____  
+    (_____)  (_____)    (______)(_____)(__ _ __)(_____)  (_____)(_______) (_____) (_______)(_____)  (_____)  (_____)
+    (_)   (_)(_)___      (_)__  (_)___     (_)  (_)___(_)(_)  ___   (_)   (_)___(_)   (_)   (_)__(_)(_)   (_)(_)___  
+    (_)   (_)  (___)_    (____)   (___)_   (_)  (_______)(_) (___)  (_)   (_______)   (_)   (_____) (_)   (_)  (___)_
+    (_)___(_)  ____(_)   (_)____  ____(_)  (_)  (_)   (_)(_)___(_)__(_)__ (_)   (_) __(_)__ ( ) ( ) (_)___(_)  ____(_)
+    (_____)  (_____)    (______)(_____)   (_)  (_)   (_) (_____)(_______)(_)   (_)(_______)(_)!  (_) (_____)  (_____)
 
-    !Configuração do Banner da mensagem do dia
-    !Desafio: Buscar na Internet imagens ASCII para o Banner
-    !Dica de site: https://manytools.org/hacker-tools/ascii-banner/
-    banner motd #AVISO: acesso autorizado somente a funcionarios#
 
-    !Habilitar a senha do Tipo-5 secret para o modo enable privilegiado
-    !OBSERVAÇÃO IMPORTANTE: veja o arquivo 00-DocumentacaoDaRede.txt a partir da linha: 90 
-    !(#02_ Usuário e Senha padrão dos Switches e Routers Cisco de cada Grupo:)
-    enable secret ????  
 
-    !Criação dos usuários, senhas do Tipo-5 e privilégios diferenciados
-    !Consultar Planilha de Nomes de Usuários
-    !OBSERVAÇÃO: Caso o grupo tenha menos integrantes, desconsiderar a criação de 04 (quatro) usuários
-    !OBSERVAÇÃO IMPORTANTE: veja o arquivo 00-DocumentacaoDaRede.txt a partir da linha: 90 
-    !(#02_ Usuário e Senha padrão dos Switches e Routers Cisco de cada Grupo:)
-    username ???nome_do_primeiro_integrante??? privilege 15 secret ????
-    username ???nome_do_segundo_integrante??? privilege 15 secret ????
-    username ???nome_do_terceiro_integrante??? privilege 15 secret ????
-    username ???nome_do_quarto_integrante??? privilege 15 secret ????
 
-    !Desativando os Serviços de Descobertas de equipamentos na rede
-    !OBSERVAÇÃO: por padrão os serviços de descobertas de equipamentos estão habilitados
-    !globalmente no Switch e Router Cisco, desabilitar o CDP ou LLDP garante a segurança
-    !de informações de equipamentos na rede.
+    enable secret 123@Tatuape
+    username ERIVELTON privilege 15 secret 123@Tatuape
+    username DIEGO privilege 15 secret 123@Tatuape
+    username JUAN privilege 15 secret 123@Tatuape
+    username RAPHAEL privilege 15 secret 123@Tatuape
+    username VAAMONDE privilege 15 secret 123@Tatuape
     no cdp run
     no lldp run
 
-    !Acessando a linha console
+
     line console 0
-
-      !Habilitando senha do Tipo-7 Password
-      !OBSERVAÇÃO IMPORTANTE: veja o arquivo 00-DocumentacaoDaRede.txt a partir da linha: 90 
-      !(#02_ Usuário e Senha padrão dos Switches e Routers Cisco de cada Grupo:)
-      password ????
-
-      !Forçando fazer login com usuário e senha
+      password 123@Tatuape
       login local
-
-      !Sincronizando os logs na tela
       logging synchronous
-
-      !Habilitando o tempo de inatividade do console
       exec-timeout 5 30
-
-      !Saindo de todos os níveis
       end
-
-  !Salvando as configurações
   copy running-config startup-config
+  show clock
+  show running-config
+  show running-config | section include con 0
+  show users
+  show logging
+  disable
+  exit
