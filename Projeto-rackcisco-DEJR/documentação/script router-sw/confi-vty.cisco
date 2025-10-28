@@ -1,0 +1,80 @@
+!SWITCH
+
+
+!Acessando o modo Exec Privilegiado
+enable
+
+  !Acessar modo de configuração global
+  configure terminal
+
+    !Acessando as linhas virtuais
+    line vty 0 4
+
+      !Habilitando senha do tipo Password Tipo-7
+      !OBSERVAÇÃO IMPORTANTE: veja o arquivo 00-DocumentacaoDaRede.txt a partir da linha: 90 
+      !(#02_ Usuário e Senha padrão dos Switches e Routers Cisco de cada Grupo:)
+      password ????
+
+      !Forçando fazer login com usuário e senha local
+      login local 
+
+      !Sincronizando os logs na tela
+      logging synchronous
+
+      !Habilitando o tempo de inatividade do terminal
+      exec-timeout 5 30
+
+      !Configuração do tipo de protocolo de transporte de entrada
+      transport input ssh
+
+      !Saindo de todos os níveis
+      end
+
+  !Salvando as configurações
+  copy running-config startup-config
+
+
+  !-------------------------------------------------------------------------------------------
+
+!ROUTER
+
+!Acessando o modo Exec Privilegiado
+enable
+
+  !Acessar modo de configuração global
+  configure terminal
+
+    !Acessando as linhas virtuais
+    line vty 0 4
+
+      !Habilitando senha do tipo Password Tipo-7
+      !OBSERVAÇÃO IMPORTANTE: veja o arquivo 00-DocumentacaoDaRede.txt a partir da linha: 90 
+      !(#02_ Usuário e Senha padrão dos Switches e Routers Cisco de cada Grupo:)
+      password ????
+
+      !Forçando fazer login com usuário e senha local
+      login local 
+
+      !Sincronizando os logs na tela
+      logging synchronous
+
+      !Habilitando o tempo de inatividade do terminal
+      exec-timeout 5 30
+
+      !Configuração do tipo de protocolo de transporte de entrada
+      transport input ssh
+
+      !Saindo de todos os níveis
+      end
+
+  !Salvando as configurações
+  copy running-config startup-config
+
+  !-------------------------------------------------------------------------------------------
+
+  !Visualizando as Configurações do Running-Config (RAM)
+!OBSERVAÇÃO: ÚNICA LINHA QUE NÃO APARECE NAS CONFIGURAÇÃO É A: crypto key generate rsa
+show running-config
+
+!Fazendo um Filtro na Visualização do Running-Config somente da Sessão Line VTY
+show running-config | section include line vty

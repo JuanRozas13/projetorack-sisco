@@ -1,0 +1,37 @@
+-Grupo-3-
+Cisco Switch Catalyst 9200L:
+Cisco Roteador C8200L-1N-4T: 
+Kit-3
+PatchPanel: 3
+
+Raphael Gustavo: ponto r.cisco: 30 | Função: Cabling | MV8: 30 
+Juan Rozas: ponto r.cisco: 29 | Função: WAN/WI-FI | MV8: 29  situação: pass
+Diego Cavalcante: ponto r.cisco: 28 | Função: Router | MV8: 28 situação: pass
+Erivelton Texeira: ponto r.cisco: 27 | Função: Switch | MV8: 27 situação: pass 
+
+A) 1 (um) Integrante Responsável pelo Cabeamento Estruturado (CABLING);
+B) 1 (um) Integrante Responsável pelo Switch Cisco Catalyst 9200L (SWITCHING);
+C) 1 (um) Integrante Responsável pelo Router Cisco C8200L (ROUTING);
+D) 1 (um) Integrante Responsável pelo Link WAN, Internet e Documentação (DOCS);
+E) TODOS OS INTEGRANTES SERÃO RESPONSÁVEIS PELOS DESKTOPS LINUX MINT 22.1 E WINDOWS 10
+
+---------------------------------------------------------------------------------------------------------
+
+Maquina do Router(Diego)
+Gerenciador de dispositivos --> Portas (Com e LPT) --> USB Serieal Port(COM4) 
+putty --> Serieal --> Serial line (COM4) --> connection type: Serial 
+open --> no --> (enter) 
+
+Enter enable secret: 123@Tatuape
+
+Enter your slection[2]; 2
+
+
+
+---
+criar usuarios com o nome de cada integrante tudo minuscolo e primeiro nome
+A) Senha padrão: 123@senac
+B) Usuário: seguir o padrão da documentação dos scripts alterando o seu valor dentro de ???__ __???.
+   Exemplo: username ???nome_do_primeiro_integrante??? privilege 15 secret ????
+            username vaamonde privilege 15 secret 123@senac
+C) Domínio padrão: senac.br
