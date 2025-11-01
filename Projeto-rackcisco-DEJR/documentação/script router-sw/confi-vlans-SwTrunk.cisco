@@ -1,0 +1,158 @@
+!Acessando o modo Exec Privilegiado
+enable
+
+  !Acessar modo de configuração global
+  configure terminal
+
+    !Criando as VLANs Standard (Padrão) no Switch Layer 3 3560
+    !OBSERVAÇÃO IMPORTANTE: veja o arquivo 00-DocumentacaoDaRede.txt a partir da linha: 77
+    !(TERCEIRA ETAPA: Determinação das Redes (Sub-Redes) e VLAN (Virtual-LAN) de Cada Grupo)
+
+    !Criação da VLAN padrão de SVI do Grupo
+    vlan 30
+      !Nome da VLAN padrão
+      name svig3 
+
+    !Criação das VLANs dos Usuários do Grupo
+    vlan 31
+      name  diego
+    vlan 32
+      name erivelton
+    vlan 33
+      name juan
+    vlan 34
+      name raphael
+
+    !Criação da VLAN da Rede Sem-Fio
+    vlan 35
+      name wifi
+      exit
+
+    !OBSERVAÇÃO IMPORTANTE: a Interface gigabitEthernet  0/1 não será usada nesse projeto (Interface Reservada).
+
+    !Configurando a Interface de Acesso a VLAN do Primeiro Usuário
+    interface gigabitEthernet  1/0/2
+
+      !Configurando a Interface de Acesso a VLAN
+      description Interface de Acesso da VLAN Diego_Cavalvanti
+
+      !Configurando o Modo de Acesso da Interface
+      switchport mode access 
+
+      !Configurando o Acesso a VLAN
+      switchport access vlan 31
+
+      !Saindo da configuração da Interface
+      exit
+
+    !Configurando a Interface de Acesso a VLAN do Segundo Usuário
+    interface gigabitEthernet  1/0/3
+      description Interface de Acesso da VLAN Erivelton_Teixeira
+      switchport mode access
+      switchport access vlan 32
+      exit
+
+    !Configurando a Interface de Acesso a VLAN do Terceiro Usuário
+    interface gigabitEthernet  1/0/4
+      description Interface de Acesso da VLAN Juan_Rozas
+      switchport mode access
+      switchport access vlan 33
+      exit
+
+    !Configurando a Interface de Acesso a VLAN do Quarto Usuário
+    interface gigabitEthernet  1/0/5
+      description Interface de Acesso da VLAN Raphael_Gustavo
+      switchport mode access
+      switchport access vlan 34
+      exit
+
+    !Configurando a Interface de Acesso a VLAN da Rede Sem-Fio (Wi-Fi/Wireless)
+    !OBSERVAÇÃO IMPORTANTE: A interface gigabitEthernet  0/6 sempre será utilizada para a VLAN
+    !da Rede Sem-Fio (Wi-Fi/Wireless) não alterar a porta.
+    interface gigabitEthernet  1/0/6
+      description Interface de Acesso da VLAN Wireless do Grupo-3
+      switchport mode access
+      switchport access vlan 35
+      exit
+
+    !Desativando as Interfaces que não serão utilizadas no Switch Layer 3 3560
+    interface range gigabitEthernet  1/0/7 - 23
+      shutdown
+      exit
+
+    !Configurando a Interface de Trunk do Switch 3560 com o Router 2911
+    interface gigabitEthernet  1/0/24
+      description Interface de Trunk com o Router C8200L-1N-4T do Grupo-3
+      switchport trunk encapsulation dot1q
+      switchport mode trunk
+      exit
+    
+    !Habilitando o serviço de Roteamento do Switch Layer 3
+    ip routing
+
+    !Criando uma rota estática padrão para o gerenciamento remoto do Switch Layer 3
+    !Utilizado para resolver o problema de acesso remoto do Switch entre VLANs
+    !OBSERVAÇÃO IMPORTANTE: veja o arquivo 00-DocumentacaoDaRede.txt a partir da linha: 129 
+    !(QUARTA ETAPA: Determinação dos Endereços de SVI (Switch Virtual Interface) e Gateway de cada Grupo)
+    ip route 0.0.0.0 0.0.0.0 172.16.30.254
+    end
+
+  !Salvando as configurações
+  copy running-config startup-config
+
+
+
+
+
+
+  !--------------------------------------------------
+  !Verificando as Configurações do Switch Cisco Catalyst Catalyst 9200L e C8200L-1N-4T
+
+
+  !Visualizando as configurações
+  show running-config
+
+  !Visualizando as configurações de endereçamento IPv4
+  show ip interface brief
+
+  !Visualizando as informações de VLAN
+  show vlan brief
+
+  !Visualizando informações de uma VLAN utilizando o ID
+  show vlan id ???
+
+  !Visualizando informações de uma VLAN utilizando o Nome
+  show vlan name ???
+
+  !Visualizando as informações de Status das Interfaces
+  show interface status
+
+  !Visualizando informações de Interfaces Trunk
+  show interface trunk
+
+  !Visualizando informações detalhadas das Interfaces de Trunk
+  show interfaces gigabitEthernet  1/0/24 status
+  show interfaces gigabitEthernet  1/0/24 switchport
+
+  !Visualizando a tabela de roteamento local
+  show ip route
+
+  !Comandos para testar a conexão do Switch Catalyst 9200L com o Router C8200L-1N-4T
+
+  !Pingando o endereço de SVI do Switch Catalyst 9200L
+  ping 172.16.30.253
+
+  !Pingando o endereço de Gateway da Subinterface do Router C8200L-1N-4T
+  ping 172.16.30.254
+
+  !Acessando via SSH o Router C8200L-1N-4T a partir do Switch Catalyst 9200L
+  !OBSERVAÇÃO: -l (éli não é o número "1" (um) e sim "l" (éli) em minúsculo)
+  ssh -l Raphael 172.16.30.254
+
+
+
+
+
+
+
+  

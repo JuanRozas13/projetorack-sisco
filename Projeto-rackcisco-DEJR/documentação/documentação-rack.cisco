@@ -15,7 +15,7 @@ C) 1 (um) Integrante Responsável pelo Router Cisco C8200L (ROUTING);
 D) 1 (um) Integrante Responsável pelo Link WAN, Internet e Documentação (DOCS);
 E) TODOS OS INTEGRANTES SERÃO RESPONSÁVEIS PELOS DESKTOPS LINUX MINT 22.1 E WINDOWS 10
 
----------------------------------------------------------------------------------------------------------
+!---------------------------------------------------------------------------------------------------------
 
 Maquina do Router(Diego)
 Gerenciador de dispositivos --> Portas (Com e LPT) --> USB Serieal Port(COM4) 
@@ -27,11 +27,32 @@ Enter enable secret: 123@Tatuape
 Enter your slection[2]; 2
 
 
+!------------------------------------------
 
----
+
 criar usuarios com o nome de cada integrante tudo minuscolo e primeiro nome
 A) Senha padrão: 123@senac
 B) Usuário: seguir o padrão da documentação dos scripts alterando o seu valor dentro de ???__ __???.
    Exemplo: username ???nome_do_primeiro_integrante??? privilege 15 secret ????
             username vaamonde privilege 15 secret 123@senac
 C) Domínio padrão: senac.br
+
+!Interfaces das portas fisicas do router 
+
+rt-g3#show ip interface  brief
+
+Interface              IP-Address      OK? Method Status                Protocol
+
+GigabitEthernet0/0/0   unassigned      YES NVRAM  administratively down down
+
+GigabitEthernet0/0/1   unassigned      YES NVRAM  administratively down down
+
+GigabitEthernet0/0/2   unassigned      YES NVRAM  administratively down down
+
+GigabitEthernet0/0/3   unassigned      YES NVRAM  administratively down down
+
+Serial0/1/0            unassigned      YES NVRAM  administratively down down
+
+Serial0/1/1            unassigned      YES NVRAM  administratively down down
+
+ 
