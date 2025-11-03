@@ -14,7 +14,7 @@ enable
       network 172.16.31.0 255.255.255.0
       default-router 172.16.31.254
       dns-server 8.8.8.8 8.8.4.4
-      domain name senac.br
+      domain-name senac.br
       exit
 
     !Configurando o Pool do DHCP Server da VLAN do Segundo Usuário	
