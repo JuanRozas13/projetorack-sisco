@@ -54,7 +54,7 @@ enable
       network 172.16.35.0 255.255.255.0
       default-router 172.16.35.254
       dns-server 8.8.8.8 8.8.4.4
-      domain-name senasc.br
+      domain-name senac.br
       end
 
   !Salvando as configurações

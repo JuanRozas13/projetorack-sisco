@@ -56,3 +56,9 @@ Serial0/1/0            unassigned      YES NVRAM  administratively down down
 Serial0/1/1            unassigned      YES NVRAM  administratively down down
 
  
+
+
+ !--------------------------------------------------------------
+ !Acesso ao ssh
+
+ ssh -l JUAN 172.16.30.253
