@@ -8,7 +8,7 @@ enable
     interface loopback 0
 
       !Descrição da Interface de Loopback
-      description Interface de Loopback para ID do OSPF do Grupo-0???
+      description Interface de Loopback para ID do OSPF do Grupo-3
 
       !Endereço IPv4 para o ID do OSPF da Interface de Loopback
       !Verificar o endereçamento IPv4 de Loopback do seu grupo
