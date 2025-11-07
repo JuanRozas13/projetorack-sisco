@@ -1,0 +1,38 @@
+!Backup das configurações do Router Cisco Catalyst C8200L-1N-4T
+
+!Acessando o modo exec privilegiado
+enable
+
+  !Salvando as configurações da RAM para a NVRAM
+  copy running-config startup-config
+
+  !Salvando uma cópia das configurações da NVRAM para FLASH
+  copy startup-config flash:
+
+  !Visualizando o conteúdo da Flash
+  dir flash:
+
+  !Salvando as configurações para NOTEPAD++ ou VSCode
+  show running-config
+
+
+
+
+
+
+!Backup das configurações do Switch Cisco Catalyst 9200L
+
+!Acessando o modo exec privilegiado
+enable
+
+  !Salvando as configurações da RAM para a NVRAM
+  copy running-config startup-config
+
+  !Salvando uma cópia das configurações da NVRAM para FLASH
+  copy startup-config flash:
+
+  !Visualizando o conteúdo da Flash
+  dir flash:
+
+  !Salvando as configurações para NOTEPAD++ ou VSCode
+  show running-config

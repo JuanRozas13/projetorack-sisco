@@ -1,0 +1,22 @@
+!OBSERVAÇÃO: ANTES DE CONECTAR NA REDE, FAÇA TODAS AS CONFIGURAÇÕES DO ROUTER ACCESS POINT D-LINK, TP-LINK OU LINKSYS FORA DA REDE, TESTAR E VERIFICA SE TUDO ESTÁ FUNCIONANDO, DEPOIS CONECTA NA SUA VLAN DA REDE SEM-FIO (WI-FI/WIRELESS).
+
+!OBSERVAÇÃO IMPORTANTE: DESATIVAR O SERVIÇO DE DHCP SERVER DO ROUTER ACCESS POINT D-LINK, TP-LINK OU LINKSYS, CONECTAR O CABO DE REDE NA PORTA 6 DO SEU SWITCH DIRETAMENTE NA PORTA DE SWITCH DO ROUTER ACCESS POINT D-LINK, TP-LINK OU LINKSYS, O ENDEREÇO IPv4 SERÁ FORNECIDO PELO ROUTER CISCO 2911.
+
+!-------------------------------------------------------------------
+
+!Endereço IPv4 de cada Access Point para o Gerenciamento dos Grupos
+C) Grupo-03   IPv4: 172.16.35.250 - Máscara: 255.255.255.0
+
+
+!-------------------------------------------------------------------
+
+!Configuração das Redes Sem-Fio (cuidado com roteadores Dual Band 2.4Ghz e 5.0Ghz)
+C) Grupo-03   SSID: G-03-2.4 e G-03-5.0 - Senha: 123@senac
+
+
+!-------------------------------------------------------------------
+
+!Configurações especificas da Rede Sem-Fio de 2.4Ghz (WiFi 4) e 5.0Ghz (WiFi 6)
+C) Grupo-03: WiFi 4 (802.11n) 2.4Ghz Channel Width (MHz): 20MHz - Channel: 11 - Transmit Power: Medium - Security Protocol: WPA2 Personal
+
+C) Grupo-03: WiFi 6 (802.11ax) 5.0Ghz Channel Width (MHz): 40MHz - Channel: 151 - Transmit Power: High - Security Protocol: WPA2 Personal

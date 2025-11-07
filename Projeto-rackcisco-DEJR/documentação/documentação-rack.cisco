@@ -28,6 +28,8 @@ ponto r.sisco 29 na porta 4 Switch
 ponto r.sisco 30 na porta 5 Switch
 ponto r.sisco 25 na porta 6 Switch
 
+ip do Access point: 
+IPv4: 172.16.35.250 - Máscara: 255.255.255.0
 
 !---------------------------------------------------------------------------------------------------------
 
