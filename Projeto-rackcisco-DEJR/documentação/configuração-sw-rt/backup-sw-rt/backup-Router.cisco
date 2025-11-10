@@ -1,0 +1,384 @@
+!Acessando o modo exec privilegiado
+enable
+
+  !Salvando as configurações da RAM para a NVRAM
+  copy running-config startup-config
+
+  !Salvando uma cópia das configurações da NVRAM para FLASH
+  copy startup-config flash:
+
+  !Visualizando o conteúdo da Flash
+  dir flash:
+
+  !Salvando as configurações para NOTEPAD++ ou VSCode
+  show running-config
+
+
+
+  !-------------------------------------------------------------------------------------------
+
+
+
+! Last configuration change at 22:10:44 UTC Mon Nov 10 2025
+!
+version 17.12
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+!
+hostname rt-g3
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition 65500
+ !
+ address-family ipv4
+ exit-address-family
+!
+security passwords min-length 8
+logging console emergencies
+no aaa new-model
+!
+ip domain name senac.br
+!
+!
+!
+!
+!
+!
+ip dhcp excluded-address 172.16.31.1 172.16.31.100
+ip dhcp excluded-address 172.16.31.200 172.16.31.254
+ip dhcp excluded-address 172.16.33.1 172.16.33.100
+ip dhcp excluded-address 172.16.33.200 172.16.33.254
+ip dhcp excluded-address 172.16.34.1 172.16.34.100
+ip dhcp excluded-address 172.16.34.200 172.16.34.254
+ip dhcp excluded-address 172.16.35.1 172.16.35.100
+ip dhcp excluded-address 172.16.35.200 172.16.35.254
+ip dhcp excluded-address 172.16.32.1 172.16.32.100
+ip dhcp excluded-address 172.16.32.200 172.16.32.254
+!
+ip dhcp pool PnPWebUI1
+ vrf 65500
+ host 192.168.1.3 255.255.255.0
+ client-identifier 0077.6562.7569
+ dns-server 192.168.1.1
+!
+ip dhcp pool vlan-31
+ network 172.16.31.0 255.255.255.0
+ default-router 172.16.31.254
+ dns-server 8.8.8.8 8.8.4.4
+ domain-name senac.br
+!
+ip dhcp pool vlan-33
+ network 172.16.33.0 255.255.255.0
+ default-router 172.16.33.254
+ dns-server 8.8.8.8 8.8.4.4
+ domain-name senac.br
+!
+ip dhcp pool vlan-34
+ network 172.16.34.0 255.255.255.0
+ default-router 172.16.34.254
+ dns-server 8.8.8.8 8.8.4.4
+ domain-name senac.br
+!
+ip dhcp pool vlan-35
+ network 172.16.35.0 255.255.255.0
+ default-router 172.16.35.254
+ dns-server 8.8.8.8 8.8.4.4
+ domain-name senac.br
+!
+ip dhcp pool vlan-32
+ network 172.16.32.0 255.255.255.0
+ default-router 172.16.32.254
+ dns-server 8.8.8.8 8.8.4.4
+ domain-name senac.br
+!
+!
+!
+login block-for 120 attempts 4 within 60
+login on-success log
+!
+!
+!
+!
+!
+ipv6 unicast-routing
+!
+!
+subscriber templating
+vtp version 1
+multilink bundle-name authenticated
+!
+pae
+!
+!
+crypto pki trustpoint TP-self-signed-3443006164
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3443006164
+ revocation-check none
+ rsakeypair TP-self-signed-3443006164
+ hash sha256
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+ hash sha256
+!
+!
+crypto pki certificate chain TP-self-signed-3443006164
+ certificate self-signed 01
+  30820330 30820218 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030
+  31312F30 2D060355 04030C26 494F532D 53656C66 2D536967 6E65642D 43657274
+  69666963 6174652D 33343433 30303631 3634301E 170D3235 31303234 32333538
+  34345A17 0D333531 30323432 33353834 345A3031 312F302D 06035504 030C2649
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D33 34343330
+  30363136 34308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201
+  0A028201 0100B61D 9F026CA7 5CB41B10 140E61F9 2D9C6B9F CB9D4126 814F4AEF
+  F0BBC294 3663BF06 6025CE5A 38C4B312 5BF55D03 E3ABF857 26AEE43B 7F02D0F5
+  FF9398E9 E41C954E C76107B4 F56B67A9 1D136C53 29D5B417 2EF4C5B1 043610C6
+  1516D33D 4A1686D9 21DD57BF 43679D88 E634F03E FBE013C7 3450399A 624B64F6
+  0BA6AB20 8D1D5A75 882DB3F8 78A96AB6 89DE78C7 B2D2EFBC 88C61617 CF5AE971
+  D87AAB9F CE3F23C5 68BA76B9 F8DBD800 428DC06E AF0F82ED C1BC3025 451A1040
+  08DAF815 8977A387 2BE5D49B B2A1F723 ABEA1F04 68AFDBAF CA1FA524 EB3014FA
+  FD0F8916 536234DD 3275D5DD 37D90492 1FDBE8EF 4D41F84D BD017540 CD9B1A49
+  0D93EE96 EF2B0203 010001A3 53305130 1D060355 1D0E0416 0414A890 1795FBBD
+  D5BE4976 52D0DA20 6413EEA7 5091301F 0603551D 23041830 168014A8 901795FB
+  BDD5BE49 7652D0DA 206413EE A7509130 0F060355 1D130101 FF040530 030101FF
+  300D0609 2A864886 F70D0101 0B050003 82010100 6A57660A 919075DB 43F1C192
+  60A588D8 CB428415 C0458FC2 199ADC54 0BBD5F65 28F6282D B37BA5CB D6420FB2
+  C743FEDB BA5D0321 63F10894 9E5E64DE 3482884B BC6C608C 08AC0FD1 BEF058F5
+  17C0A59C F51BA87D 6B2957FA 763E2935 DD5E3538 7E023F8F 579578AC F794A4E5
+  9EDF3F50 8C8E6AD1 A036ABD6 BAF1B19B F7290096 0132F554 52EC599C B845C3BA
+  A77073DE C563D10F CB6AB6B9 11145A29 7F4E9107 A986B99D BDF97F3B 05D2AE05
+  FB9762D9 D9332601 EBAE1B29 61BD4AD3 EA16F040 0B881330 0C63DEEF 6C9E30D0
+  F51E27D0 F9D9A332 1E9341B9 48A760EA 4D0FC3A7 A0A9FA6B B669960D 7AFA1026
+  3A15499B 248194E8 EA1E6587 30CEF9B4 473B6D27
+        quit
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  30820321 30820209 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030
+  32310E30 0C060355 040A1305 43697363 6F312030 1E060355 04031317 43697363
+  6F204C69 63656E73 696E6720 526F6F74 20434130 1E170D31 33303533 30313934
+  3834375A 170D3338 30353330 31393438 34375A30 32310E30 0C060355 040A1305
+  43697363 6F312030 1E060355 04031317 43697363 6F204C69 63656E73 696E6720
+  526F6F74 20434130 82012230 0D06092A 864886F7 0D010101 05000382 010F0030
+  82010A02 82010100 A6BCBD96 131E05F7 145EA72C 2CD686E6 17222EA1 F1EFF64D
+  CBB4C798 212AA147 C655D8D7 9471380D 8711441E 1AAF071A 9CAE6388 8A38E520
+  1C394D78 462EF239 C659F715 B98C0A59 5BBB5CBD 0CFEBEA3 700A8BF7 D8F256EE
+  4AA4E80D DB6FD1C9 60B1FD18 FFC69C96 6FA68957 A2617DE7 104FDC5F EA2956AC
+  7390A3EB 2B5436AD C847A2C5 DAB553EB 69A9A535 58E9F3E3 C0BD23CF 58BD7188
+  68E69491 20F320E7 948E71D7 AE3BCC84 F10684C7 4BC8E00F 539BA42B 42C68BB7
+  C7479096 B4CB2D62 EA2F505D C7B062A4 6811D95B E8250FC4 5D5D5FB8 8F27D191
+  C55F0D76 61F9A4CD 3D992327 A8BB03BD 4E6D7069 7CBADF8B DF5F4368 95135E44
+  DFC7C6CF 04DD7FD1 02030100 01A34230 40300E06 03551D0F 0101FF04 04030201
+  06300F06 03551D13 0101FF04 05300301 01FF301D 0603551D 0E041604 1449DC85
+  4B3D31E5 1B3E6A17 606AF333 3D3B4C73 E8300D06 092A8648 86F70D01 010B0500
+  03820101 00507F24 D3932A66 86025D9F E838AE5C 6D4DF6B0 49631C78 240DA905
+  604EDCDE FF4FED2B 77FC460E CD636FDB DD44681E 3A5673AB 9093D3B1 6C9E3D8B
+  D98987BF E40CBD9E 1AECA0C2 2189BB5C 8FA85686 CD98B646 5575B146 8DFC66A8
+  467A3DF4 4D565700 6ADF0F0D CF835015 3C04FF7C 21E878AC 11BA9CD2 55A9232C
+  7CA7B7E6 C1AF74F6 152E99B7 B1FCF9BB E973DE7F 5BDDEB86 C71E3B49 1765308B
+  5FB0DA06 B92AFE7F 494E8A9E 07B85737 F3A58BE1 1A48A229 C37C1E69 39F08678
+  80DDCD16 D6BACECA EEBC7CF9 8428787B 35202CDC 60E4616A B623CDBD 230E3AFB
+  418616A9 4093E049 4D10AB75 27E86F73 932E35B5 8862FDAE 0275156F 719BB2F0
+  D697DF7F 28
+        quit
+!
+!
+diagnostic bootup level minimal
+!
+license udi pid C8200L-1N-4T sn TSP2917AAPC
+memory free low-watermark processor 61459
+!
+spanning-tree extend system-id
+!
+enable secret 9 $9$3SXs0sKexUaf2k$gbChKsDTf6sd5Hlu2cZ9dNaNY75FRvBr.6yCzdy.8uw
+!
+username webui privilege 15 one-time password 7 070C285F4D06
+username ERIVELTON privilege 15 secret 9 $9$7S4HzJPAnIDMDU$VtTU4vZc4taBE5yF727cLkU9fssGrRUAf5vZYG2KrzU
+username DIEGO privilege 15 secret 9 $9$WALUZu6qV3T5gE$XkEjBU3Ko0QvcE5IIiuUPu6hnkFYDeEOozESxm0PTsg
+username JUAN privilege 15 secret 9 $9$0cl7wHWldULXw.$jQqw5h/px7al2bDQvjiBy17/S/Q6OzgKa.yDmgZBZGQ
+username RAPHAEL privilege 15 secret 9 $9$1yROeQ0ujqln7.$pke8oQa5iUGKcHVNswM2LDD6R7xUypvII6xtsNnyRUQ
+username VAAMONDE privilege 15 secret 9 $9$d0A1FJHrin4Ol.$OlcVYW.vw/M/hJQmp1PNsxe/9UfSi6Jit0ktWMLadz.
+!
+redundancy
+ mode none
+!
+!
+no cdp run
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ description Interface de Loopback para ID do OSPF do Grupo-3
+ ip address 3.3.3.3 255.255.255.255
+!
+interface GigabitEthernet0/0/0
+ no ip address
+ negotiation auto
+!
+interface GigabitEthernet0/0/0.30
+ description Subinterface da VLAN de SVI do Switch Layer 3 Catalyst 9200L do Grupo-3
+ encapsulation dot1Q 30
+ ip address 172.16.30.254 255.255.255.0
+!
+interface GigabitEthernet0/0/0.31
+ description Subinterface da VLAN do Diego
+ encapsulation dot1Q 31
+ ip address 172.16.31.254 255.255.255.0
+!
+interface GigabitEthernet0/0/0.32
+ description Subinterface da VLAN do Erivelton
+ encapsulation dot1Q 32
+ ip address 172.16.32.254 255.255.255.0
+!
+interface GigabitEthernet0/0/0.33
+ description Subinterface da VLAN do Juan
+ encapsulation dot1Q 33
+ ip address 172.16.33.254 255.255.255.0
+!
+interface GigabitEthernet0/0/0.34
+ description Subinterface da VLAN do Raphael
+ encapsulation dot1Q 34
+ ip address 172.16.34.254 255.255.255.0
+!
+interface GigabitEthernet0/0/0.35
+ description Subinterface da VLAN Wireless
+ encapsulation dot1Q 35
+ ip address 172.16.35.254 255.255.255.0
+!
+interface GigabitEthernet0/0/1
+ description Interface de acesso a Internet do Grupo-3
+ ip address dhcp
+ negotiation auto
+!
+interface GigabitEthernet0/0/2
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface GigabitEthernet0/0/3
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface Serial0/1/0
+ description Interface Serial do Grupo-3 para Grupo-4
+ bandwidth 2000
+ ip address 192.168.1.9 255.255.255.252
+!
+interface Serial0/1/1
+ description Interface Serial do Grupo-4 para Grupo-3
+ bandwidth 2000
+ ip address 192.168.1.6 255.255.255.252
+!
+router ospf 3
+ router-id 3.3.3.3
+ log-adjacency-changes detail
+ auto-cost reference-bandwidth 10000
+ passive-interface GigabitEthernet0/0/0
+ passive-interface GigabitEthernet0/0/1
+ network 172.16.30.0 0.0.0.255 area 0
+ network 172.16.31.0 0.0.0.255 area 0
+ network 172.16.32.0 0.0.0.255 area 0
+ network 172.16.33.0 0.0.0.255 area 0
+ network 172.16.34.0 0.0.0.255 area 0
+ network 172.16.35.0 0.0.0.255 area 0
+ network 192.168.1.4 0.0.0.3 area 0
+ network 192.168.1.8 0.0.0.3 area 0
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+!
+ip ssh bulk-mode 131072
+ip ssh time-out 60
+ip ssh authentication-retries 2
+!
+!
+!
+!
+!
+control-plane
+!
+banner motd ^C
+  _____    _____      ______  _____  _______  _____    _____  _______   _____   _____   _______  _____    _____
+(_____)  (_____)    (______)(_____)(__ _ __)(_____)  (_____)(_______) (_____) (_____) (_______)(_____)  (_____)
+(_)   (_)(_)___      (_)__  (_)___     (_)  (_)___(_)(_)  ___   (_)   (_)___(_)(_)__(_)   (_)  (_)   (_)(_)___
+(_)   (_)  (___)_    (____)   (___)_   (_)  (_______)(_) (___)  (_)   (_______)(_____)    (_)  (_)   (_)  (___)_
+(_)___(_)  ____(_)   (_)____  ____(_)  (_)  (_)   (_)(_)___(_)__(_)__ (_)   (_)( ) ( )  __(_)__(_)___(_)  ____(_)
+(_____)  (_____)    (______)(_____)   (_)  (_)   (_) (_____)(_______)(_)   (_)(_)  (_)(_______)(_____)  (_____)
+
+                     $$$
+                    $   $
+                     $$$
+                     $ $
+                     $ $
+                   $$$ $$$
+                 $$  $$$  $$$
+               $$  $$$$$$$   $
+              $               $
+             $                 $
+             $                 $
+             $     $$$$$$$$$$$$$$$
+             $    $               $
+             $    $   $$$$$$$$$$$$$
+             $   $   $           $$$
+             $   $   $ $$$   $$$  $$
+             $   $   $ $$$   $$$  $$
+             $   $   $           $$$
+             $    $   $$$$$$$$$$$$$
+             $     $$$$$$$$$$$$$$
+             $                 $
+             $    $$$$$$$$$$$$$$
+             $   $  $  $  $  $
+             $  $$$$$$$$$$$$$$
+             $  $   $  $  $  $
+             $   $$$$$$$$$$$$$$$
+            $$$                 $$$
+          $$   $$$         $$$$$   $$
+        $$        $$$$$$$$$          $$$
+       $  $$                     $$$$   $$
+    $$$$$   $$$$$$$$      $$$$$$$       $ $
+  $      $$         $$$$$$              $ $$
+$    $    $                            $ $ $
+$     $   $              $$$$$$$$$$$   $ $ $$
+$$$    $   $  $$$$$$$$$$$$          $   $ $ $$
+$   $$$$    $  $                     $   $ $$ $
+$$$    $   $$  $                     $$  $ $  $
+$   $  $  $$   $                      $  $$$  $
+$     $$ $$    $               $$$    $  $ $  $
+ ^C
+!
+line con 0
+ exec-timeout 5 30
+ password 7 08701E1D292D0403070A1C01
+ logging synchronous
+ login local
+ stopbits 1
+line aux 0
+line vty 0 4
+ exec-timeout 5 30
+ password 7 101F5B4A2523131F19053A2E
+ logging synchronous
+ login local
+ transport input ssh
+line vty 5 14
+ login
+ transport input ssh
+!
+!
+!
+!
+!
+!
+!
+end
